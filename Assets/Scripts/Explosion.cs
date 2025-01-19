@@ -9,12 +9,12 @@ public class Explosion : MonoBehaviour
 
     private void OnEnable()
     {
-        _exploader.OnExplosion += Explode;
+        _exploader.Explosion += Explode;
     }
 
     private void OnDisable()
     {
-        _exploader.OnExplosion -= Explode;
+        _exploader.Explosion -= Explode;
     }
     
     private void Explode(Vector3 point, int index)

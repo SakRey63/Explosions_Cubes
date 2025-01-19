@@ -15,20 +15,20 @@ public class CubeSpawner : MonoBehaviour
     
     private void OnEnable()
     {
-        _exploader.Spawn += SpawnCubes;
+        _exploader.Spawned += SpawnedCubes;
     }
 
     private void OnDisable()
     {
-        _exploader.Spawn -= SpawnCubes;
+        _exploader.Spawned -= SpawnedCubes;
     }
 
     void Start()
     {
-        SpawnCubes(_point, _exploader.Index, _exploader.Scale);
+        SpawnedCubes(_point, _exploader.Index, _exploader.Scale);
     }
     
-    private void SpawnCubes(Vector3 point, int index, float scale)
+    private void SpawnedCubes(Vector3 point, int index, float scale)
     {
         int cubeCount = RandomNumber(_minLimit, _maxLimit);
         

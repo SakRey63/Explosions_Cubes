@@ -13,8 +13,8 @@ public class Exploader : MonoBehaviour
     public int Index => _indexCube;
     public float Scale => _scaleCube;
 
-    public event Action<Vector3, int, float> Spawn;
-    public event Action<Vector3, int> OnExplosion;
+    public event Action<Vector3, int, float> Spawned;
+    public event Action<Vector3, int> Explosion;
 
     private void ReduceSizeCube()
     {
@@ -43,15 +43,13 @@ public class Exploader : MonoBehaviour
             
             ReduceSizeCube();
             
-            Spawn?.Invoke(point, _indexCube, _scaleCube);
+            Spawned?.Invoke(point, _indexCube, _scaleCube);
             
             ReducingChanceDivision();
         }
         else
         {
-            Debug.Log("Взрыввввввв");
-            
-            OnExplosion?.Invoke(point, _indexCube);
+            Explosion?.Invoke(point, _indexCube);
         }
     }
     
