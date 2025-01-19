@@ -3,24 +3,14 @@ using Random = UnityEngine.Random;
 
 public class ColorChanger : MonoBehaviour
 {
-    private Color _color;
+    private Color _colorCube;
 
-    public Color Color => _color;
-
-    private void OnEnable()
+    public Color ChoosingColor()
     {
-        CubeSpawner.CubeCreated += ChoosingColor;
-    }
+        _colorCube.r = Random.Range(0f,1f);
+        _colorCube.g = Random.Range(0f,1f);
+        _colorCube.b = Random.Range(0f,1f);
 
-    private void OnDisable()
-    {
-        CubeSpawner.CubeCreated -= ChoosingColor;
-    }
-
-    private void ChoosingColor()
-    {       
-        _color.r = Random.Range(0f,1f);
-        _color.g = Random.Range(0f,1f);
-        _color.b = Random.Range(0f,1f);
+        return _colorCube;
     }
 }

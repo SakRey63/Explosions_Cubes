@@ -148,4 +148,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scaleCube: 1
   _index: 3
-  _color: {fileID: 0}
+  _explosionForce: 500
+  _explosionRadius: 300

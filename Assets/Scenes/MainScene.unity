@@ -735,6 +735,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194230}
   - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
@@ -830,6 +831,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 963194227}
+  _exploader: {fileID: 1816201527}
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382137d323b4962428f3e8605e843cc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1179406945
 GameObject:
   m_ObjectHideFlags: 0
@@ -914,10 +928,9 @@ MonoBehaviour:
   _maxChanceSeparation: 101
   _chanceSeparation: 100
   _minChanceSeparation: 0
-  _explosionForce: 500
-  _explosionRadius: 300
   _scaleCube: 3
   _indexCube: 0
+  _raycaster: {fileID: 963194229}
 --- !u!114 &1816201528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -932,9 +945,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _minLimit: 2
   _maxLimit: 7
-  _point: {fileID: 1816201526}
+  _point: {x: 50, y: 15, z: 50}
   _cube: {fileID: 7302922490999517561, guid: 39d4ec5946f753c418054d940a3e5b66, type: 3}
   _exploader: {fileID: 1816201527}
+  _colorChanger: {fileID: 963194230}
 --- !u!1 &1889649367
 GameObject:
   m_ObjectHideFlags: 0
