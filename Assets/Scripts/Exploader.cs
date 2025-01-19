@@ -10,14 +10,11 @@ public class Exploader : MonoBehaviour
     [SerializeField] private float _scaleCube = 3;
     [SerializeField] private int _indexCube = 0;
     [SerializeField] private Raycaster _raycaster;
-
-    private bool _onExplosion;
-
-    public bool OnExplosion => _onExplosion;
     public int Index => _indexCube;
     public float Scale => _scaleCube;
 
     public event Action<Vector3, int, float> Spawn;
+    public event Action<Vector3, int> OnExplosion;
 
     private void ReduceSizeCube()
     {
@@ -42,8 +39,6 @@ public class Exploader : MonoBehaviour
         
         if (numberChance <= _chanceSeparation)
         {
-            _onExplosion = true;
-            
             _indexCube++;
             
             ReduceSizeCube();
@@ -54,7 +49,9 @@ public class Exploader : MonoBehaviour
         }
         else
         {
-            _onExplosion = false;
+            Debug.Log("Взрыввввввв");
+            
+            OnExplosion?.Invoke(point, _indexCube);
         }
     }
     

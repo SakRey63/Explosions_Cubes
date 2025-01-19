@@ -891,6 +891,7 @@ GameObject:
   - component: {fileID: 1816201526}
   - component: {fileID: 1816201527}
   - component: {fileID: 1816201528}
+  - component: {fileID: 1816201529}
   m_Layer: 0
   m_Name: SpawnPoints
   m_TagString: Untagged
@@ -949,6 +950,21 @@ MonoBehaviour:
   _cube: {fileID: 7302922490999517561, guid: 39d4ec5946f753c418054d940a3e5b66, type: 3}
   _exploader: {fileID: 1816201527}
   _colorChanger: {fileID: 963194230}
+--- !u!114 &1816201529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816201525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e31cda65aa4b844b0aa779a9e4ed13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _exploader: {fileID: 1816201527}
+  _explosionForce: 700
+  _explosionRadius: 500
 --- !u!1 &1889649367
 GameObject:
   m_ObjectHideFlags: 0

@@ -26,7 +26,7 @@ public class Raycaster : MonoBehaviour
 
                 PositionCube?.Invoke(hitCube.transform.position);
                 
-                hitCube.DestroyCube(_exploader.OnExplosion);
+                hitCube.DestroyCube();
             }
         }
     }
