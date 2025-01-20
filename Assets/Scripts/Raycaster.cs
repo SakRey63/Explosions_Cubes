@@ -8,7 +8,7 @@ public class Raycaster : MonoBehaviour
     
     private Ray _ray;
     
-    public event Action<Vector3> PositionCube; 
+    public event Action<Vector3, int> PositionCube; 
     
     private void Update()
     {
@@ -24,7 +24,7 @@ public class Raycaster : MonoBehaviour
             {
                 Cube hitCube = hit.collider.GetComponent<Cube>();
 
-                PositionCube?.Invoke(hitCube.transform.position);
+                PositionCube?.Invoke(hitCube.transform.position, hitCube.Index);
                 
                 hitCube.DestroyCube();
             }

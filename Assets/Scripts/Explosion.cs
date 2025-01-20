@@ -4,8 +4,12 @@ using UnityEngine;
 public class Explosion : MonoBehaviour
 {
     [SerializeField] private Exploader _exploader;
+    [SerializeField] private float _startEplosionForce;
     [SerializeField] private float _explosionForce;
+    [SerializeField] private float _startExplosionRadius;
     [SerializeField] private float _explosionRadius;
+    [SerializeField] private float _increasingRadius;
+    [SerializeField] private float _increasinForceExplosion;
 
     private void OnEnable()
     {
@@ -16,15 +20,32 @@ public class Explosion : MonoBehaviour
     {
         _exploader.Explosion -= Explode;
     }
+
+    private void IncreasinForceRadiusExplosion(int indexCube)
+    {
+        if ( indexCube > 0)
+        {
+            for (int i = 0; i < indexCube; i++)
+            {
+                _explosionForce += _increasinForceExplosion;
+                _explosionRadius += _increasingRadius;
+            }
+        }
+    }
     
     private void Explode(Vector3 point, int index)
     {
         foreach (Rigidbody explodableObject in GetExplodableObjects(point, index))
         {
-            explodableObject.AddExplosionForce(_explosionForce, transform.position, _explosionRadius);
+            IncreasinForceRadiusExplosion(index);
+            
+            explodableObject.AddExplosionForce( _explosionForce, point, _explosionRadius);
         }
-    }
 
+        _explosionForce = _startEplosionForce;
+        _explosionRadius = _startExplosionRadius;
+    }
+    
     private List<Rigidbody> GetExplodableObjects(Vector3 point, int index)
     {
         Collider[] hits = Physics.OverlapSphere(point, _explosionRadius);

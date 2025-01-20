@@ -33,7 +33,7 @@ public class Exploader : MonoBehaviour
         _raycaster.PositionCube -= Separation;
     }
     
-    private void Separation(Vector3 point)
+    private void Separation(Vector3 point, int index)
     {
         int numberChance = RandomNumber(_minChanceSeparation, _maxChanceSeparation);
         
@@ -49,7 +49,7 @@ public class Exploader : MonoBehaviour
         }
         else
         {
-            Explosion?.Invoke(point, _indexCube);
+            Explosion?.Invoke(point, index);
         }
     }
     
