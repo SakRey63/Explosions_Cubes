@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,22 +6,13 @@ public class Explosion : MonoBehaviour
 {
     [SerializeField] private Exploader _exploader;
     [SerializeField] private float _startEplosionForce;
-    [SerializeField] private float _explosionForce;
     [SerializeField] private float _startExplosionRadius;
-    [SerializeField] private float _explosionRadius;
     [SerializeField] private float _increasingRadius;
     [SerializeField] private float _increasinForceExplosion;
-
-    private void OnEnable()
-    {
-        _exploader.Explosion += Explode;
-    }
-
-    private void OnDisable()
-    {
-        _exploader.Explosion -= Explode;
-    }
-
+    
+    private float _explosionRadius;
+    private float _explosionForce;
+    
     private void IncreasinForceRadiusExplosion(int indexCube)
     {
         if ( indexCube > 0)
@@ -33,7 +25,7 @@ public class Explosion : MonoBehaviour
         }
     }
     
-    private void Explode(Vector3 point, int index)
+    public void Explode(Vector3 point, int index)
     {
         foreach (Rigidbody explodableObject in GetExplodableObjects(point, index))
         {

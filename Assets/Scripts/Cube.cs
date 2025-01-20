@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Cube : MonoBehaviour
@@ -10,6 +11,8 @@ public class Cube : MonoBehaviour
     private Renderer _renderer;
     
     public int Index => _index;
+    
+    public static event Action <Vector3, int> InfoCubed; 
 
     private void Awake()
     {
@@ -25,6 +28,8 @@ public class Cube : MonoBehaviour
     
     public void DestroyCube()
     {
+        InfoCubed?.Invoke(transform.position, _index);
+        
         Destroy(gameObject);
     }
 

@@ -9,12 +9,14 @@ public class Exploader : MonoBehaviour
     [SerializeField] private int _minChanceSeparation = 0;
     [SerializeField] private float _scaleCube = 3;
     [SerializeField] private int _indexCube = 0;
-    [SerializeField] private Raycaster _raycaster;
-    public int Index => _indexCube;
-    public float Scale => _scaleCube;
-
-    public event Action<Vector3, int, float> Spawned;
-    public event Action<Vector3, int> Explosion;
+    [SerializeField] private Vector3 _pointSpawn;
+    [SerializeField] private CubeSpawner _cubeSpawner;
+    [SerializeField] private Explosion _explosion;
+    
+    private void Start()
+    {
+        _cubeSpawner.SpawnedCubes(_pointSpawn, _indexCube, _scaleCube);
+    }
 
     private void ReduceSizeCube()
     {
@@ -25,17 +27,17 @@ public class Exploader : MonoBehaviour
     
     private void OnEnable()
     {
-        _raycaster.PositionCube += Separation;
+        Cube.InfoCubed += Separation;
     }
 
     private void OnDisable()
     {
-        _raycaster.PositionCube -= Separation;
+        Cube.InfoCubed -= Separation;
     }
     
     private void Separation(Vector3 point, int index)
     {
-        int numberChance = RandomNumber(_minChanceSeparation, _maxChanceSeparation);
+        int numberChance = GetRandomNumber(_minChanceSeparation, _maxChanceSeparation);
         
         if (numberChance <= _chanceSeparation)
         {
@@ -43,13 +45,13 @@ public class Exploader : MonoBehaviour
             
             ReduceSizeCube();
             
-            Spawned?.Invoke(point, _indexCube, _scaleCube);
+            _cubeSpawner.SpawnedCubes(point, _indexCube, _scaleCube);
             
             ReducingChanceDivision();
         }
         else
         {
-            Explosion?.Invoke(point, index);
+            _explosion.Explode(point, index);
         }
     }
     
@@ -60,7 +62,7 @@ public class Exploader : MonoBehaviour
         _chanceSeparation = _chanceSeparation / bisection;
     }
 
-    private int  RandomNumber(int minNumber, int maxNumber)
+    private int  GetRandomNumber(int minNumber, int maxNumber)
     {
         int random = Random.Range(minNumber, maxNumber);
 

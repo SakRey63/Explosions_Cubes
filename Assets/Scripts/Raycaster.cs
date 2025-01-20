@@ -4,11 +4,8 @@ using UnityEngine;
 public class Raycaster : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
-    [SerializeField] private Exploader _exploader;
     
     private Ray _ray;
-    
-    public event Action<Vector3, int> PositionCube; 
     
     private void Update()
     {
@@ -22,11 +19,7 @@ public class Raycaster : MonoBehaviour
     
             if (hit.collider.TryGetComponent(out Cube cube))
             {
-                Cube hitCube = hit.collider.GetComponent<Cube>();
-
-                PositionCube?.Invoke(hitCube.transform.position, hitCube.Index);
-                
-                hitCube.DestroyCube();
+                cube.DestroyCube();
             }
         }
     }

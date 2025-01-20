@@ -5,38 +5,22 @@ public class CubeSpawner : MonoBehaviour
 {
     [SerializeField] private int _minLimit;
     [SerializeField] private int _maxLimit;
-    [SerializeField] private Vector3 _point;
     [SerializeField] private Cube _cube;
-    [SerializeField] private Exploader _exploader;
-    [SerializeField] private ColorChanger _colorChanger;
 
     private Vector3 _pointSpawn;
     private Color _color;
     
-    private void OnEnable()
+    public void SpawnedCubes(Vector3 point, int index, float scale)
     {
-        _exploader.Spawned += SpawnedCubes;
-    }
-
-    private void OnDisable()
-    {
-        _exploader.Spawned -= SpawnedCubes;
-    }
-
-    void Start()
-    {
-        SpawnedCubes(_point, _exploader.Index, _exploader.Scale);
-    }
-    
-    private void SpawnedCubes(Vector3 point, int index, float scale)
-    {
-        int cubeCount = RandomNumber(_minLimit, _maxLimit);
+        int cubeCount = GetRandomNumber(_minLimit, _maxLimit);
         
         for (int i = 0; i < cubeCount; i++)
         {
             Cube newCube = Instantiate(_cube, point, Quaternion.Euler(Vector3.zero));
 
-            _color = _colorChanger.ChoosingColor();
+            TryGetComponent(out ColorChanger color);
+
+            _color = color.ChoosingColor();
             
             newCube.AssigningParameters(index, scale, _color);
 
@@ -44,7 +28,7 @@ public class CubeSpawner : MonoBehaviour
         }
     }
     
-    private int  RandomNumber(int minNumber, int maxNumber)
+    private int  GetRandomNumber(int minNumber, int maxNumber)
     {
         int random = Random.Range(minNumber, maxNumber);
 
